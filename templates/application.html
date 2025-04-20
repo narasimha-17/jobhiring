@@ -1,0 +1,67 @@
+<h2>Application Form</h2>
+<br>
+<style>
+    .form-container {
+        max-width: 600px;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+    .form-group {
+        margin-bottom: 15px;
+    }
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+    }
+    .form-actions {
+        text-align: right;
+    }
+    </style>
+<form action="/job/{{job['id']}}/apply" method="post"  enctype="multipart/form-data">
+
+    <div class="form-container">
+        <h2>Job Application Form</h2>
+        
+        <form action="/submit_application" method="post">
+          <div class="form-group">
+            <label for="fullname">Full Name</label>
+            <input type="text" id="fullname" name="fullname" required>
+          </div>
+    
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+    
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" required>
+          </div>
+    
+         
+    
+          
+            <div class="form-group">
+                <label for="resume">Resume Link</label>
+                <input type="text"name="resume"  required>
+    </div>
+    <form method="POST" action="{{ url_for('apply_to_job', id=job.id) }}">
+      <input type="hidden" name="user_id" value="{{ session['user_id'] }}">
+      
+  </form>
+          <input type="submit" value="Submit" class="btn btn-primary">
+        </form>
+      </div>
+
+
+</form>

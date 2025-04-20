@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Applications - Recruiter Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding-top: 2em;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 2em;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 960px;
+            margin-bottom: 2em;
+        }
+
+        header {
+            margin-bottom: 1.5em;
+            text-align: center;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 1em;
+        }
+
+        header h1 {
+            color: #333;
+            margin-bottom: 0.3em;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 1em;
+            font-size: 0.9em;
+            color: #007bff;
+            text-decoration: none;
+            margin-right: 1em;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 1em 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1em;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            border-radius: 6px;
+            overflow: hidden;
+            background-color: #fff;
+        }
+
+        thead {
+            background-color: #f8f9fa;
+            color: #495057;
+            font-weight: bold;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        th {
+            white-space: nowrap;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f5f5f5;
+        }
+
+        tbody tr:hover {
+            background-color: #e9ecef;
+        }
+
+        .no-applications {
+            color: #6c757d;
+            font-style: italic;
+            margin-top: 1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>All Applications</h1>
+            <a href="{{ url_for('recruiter_selection') }}" class="back-link">&larr; Back to Dashboard</a>
+        </header>
+        <main>
+            {% if applications %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Application ID</th>
+                        <th>Job Title</th>
+                        <th>Applicant Name</th>
+                        <th>Applicant Email</th>
+                        <th>Applied Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for application in applications %}
+                    <tr>
+                        <td>{{ application.id }}</td>
+                        <td>{{ application.job_title }}</td>
+                        <td>{{ application.applicant_name }}</td>
+                        <td>{{ application.applicant_email }}</td>
+                        <td>{{ application.applied_date }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p class="no-applications">No applications found.</p>
+            {% endif %}
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>submit_application</title>
+    {% include 'bootstrap.html' %}
+    <style>
+    body{
+        padding-top: 3px;
+    }
+    .container {
+        background-color: #fff;
+        padding-top: 30px;
+        padding: 50px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        width: 800px;
+        max-width: 90%;
+        margin: auto;
+    }
+</style>
+
+</head>
+<body>
+    <div class="container">
+    <h1>Application Submited</h1>
+    <br>
+    <h3>Full Name</h3>
+    <div><h3>{{ application['fullname'] }}</h3></div>
+    <br>
+
+    <h3>E-MAil</h3>
+    <div><h3>{{ application['email'] }}</h3></div>
+  
+    <h3>Resume Link</h3>
+    <div><h3>{{ application['resume'] }}</h3></div>
+    <br>
+
+</div>
+</body>
+</html>

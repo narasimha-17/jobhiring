@@ -1,3 +1,5 @@
+
+  
   <div  class="border-bottom row" style=" margin-bottom: 16px; padding: 4px;">
     <div class="col-9">
     <h4 style="color: rgb(120 120 120); margin-bottom: 5px;">{{job['title']}}</h4>
@@ -8,6 +10,10 @@
     {% endif %}
     
   
-    <div class="col-3"><button type="button" class="btn btn-outline-primary">Apply</button>
+    
+    <div class="col-3 padding-right:16px">
+      <a href="/job/{{job['id']}}" type="button" class="btn btn-outline-primary float-right align-middle">Apply</a>
     </div>
  </div>
+
+ 

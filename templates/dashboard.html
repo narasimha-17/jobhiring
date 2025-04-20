@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+    font-family: sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+    text-align: left;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: calc(100% - 12px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+p {
+    margin-top: 20px;
+    color: #777;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.error {
+    color: red;
+    margin-bottom: 10px;
+}
+    </style>
+</head>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Your Dashboard</h1>
+        {% if session['user_id'] %}
+            <p>Logged in as user ID: {{ session['user_name'] }}</p>
+            <p><button><a href="{{ url_for('login') }}">Logout</a></button></p>
+
+            <h2>Your Applications</h2>
+            {% if applications %}
+                <table class="applications-table">
+                    <thead>
+                        <tr>
+                            <th>Job Title</th>
+                            <th>Applied On</th>
+                            <th>Status</th>
+                           
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for application in applications %}
+                            <tr>
+                                <td>{{ application.job_title }}</td>
+                                <td>{{ application.applied_on.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                                <td>
+                                    {% if application.status == 'pending' %}
+                                        <span class="status pending">Pending</span>
+                                    {% elif application.status == 'reviewed' %}
+                                        <span class="status reviewed">Reviewed</span>
+                                    {% elif application.status == 'shortlisted' %}
+                                        <span class="status shortlisted">Shortlisted</span>
+                                    {% elif application.status == 'rejected' %}
+                                        <span class="status rejected">Rejected</span>
+                                    {% else %}
+                                        {{ application.status|capitalize }}
+                                    {% endif %}
+                                </td>
+                                <td><a href="{{ url_for('dashboard', application_id=application.id) }}"></a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>You haven't submitted any applications yet.</p>
+            {% endif %}
+
+            <h2>Saved Jobs</h2>
+            {% if saved_jobs %}
+                <ul>
+                    {% for job in saved_jobs %}
+                        <li><a href="{{ url_for('show_job', id=job.id) }}">{{ job.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>You haven't saved any jobs yet.</p>
+            {% endif %}
+
+        {% else %}
+            <p>Please <button><a href="{{ url_for('login') }}">login</a></button> to view your dashboard.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

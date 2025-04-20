@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   
+    <title><h1></h1>{{job.title}}-SRMCarrers</title>
+    {% include 'bootstrap.html' %}
+    <style>
+        body{
+            padding-top: 3px;
+        }
+        .container {
+            background-color: #fff;
+            padding-top: 30px;
+            padding: 50px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            width: 800px;
+            max-width: 90%;
+            margin: auto;
+        }
+    </style>
+    
+</head>
+<body>
+    
+{% include 'nav.html' %}
+<br>
+<div class="container">
+ <h3>Title</h3>
+ <p>
+    {{job.title}}
+ </p>
+ <h3>Location</h3>
+ <p>{{job.location}}</p>
+ <h3>Salary</h3>
+ <p>{{job.currency}}{{job.salary}}</p>
+ <h3>Job Requirements</h3>
+ <ul>
+  {% for line in job.requirements.split("\n") %}
+    <li>{{line}}</li>
+    {% endfor %}
+</ul>
+ <h3>Job Responsibilites</h3>
+ <ul>
+    {% for line in job.responsibilities.split("\n") %}
+    <li>{{line}}</li>
+    {% endfor %}
+ </ul>
+    
+ {% include 'application.html' %}
+ </div>
+
+ <br>
+ 
+</body>
+
+</html>
